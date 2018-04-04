@@ -11,7 +11,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -53,6 +53,7 @@ public class MySQL {
             row=null;
         }
     }
+    
     private void action(String comm){
         try{
         ps=connection.prepareStatement(comm);
@@ -60,6 +61,7 @@ public class MySQL {
         }
         catch(SQLException e){}
     }
+    
     
     public ResultSet getRows(String table){
         getData("SELECT * FROM "+table+";");
@@ -80,6 +82,30 @@ public class MySQL {
         action("DELETE FROM "+table+" WHERE id"+table+"="+id+";");
     }
     
+    public void insertRow(String table,ArrayList data){
+        String campos="(";
+        String comm;
+        ResultSet fields=getDesc(table);
+        try{
+            while(fields.next()){
+                campos+=fields.getString(1)+",";
+            }
+            campos=campos.substring(0,campos.length()-1);
+            campos+=")";
+            comm="INSERT INTO "+table+" "+campos+" VALUES (";
+            for(int i=0;i<data.size();i++){
+                comm+=data.get(i)+",";
+            }
+            comm=comm.substring(0,comm.length()-1);
+            comm+=");";
+            System.out.println(comm);
+        }
+        catch(SQLException e){
+            
+        }
+        
+    }
+    
     public void CloseConnection(){
         try{
         connection.close();
@@ -94,6 +120,10 @@ public class MySQL {
         ResultSet desc=mysql.getDesc("partido");
         ResultSet rows=mysql.getRows("tipopartido");
         //mysql.deleteRow("temporada", 2);
+        ArrayList data=new ArrayList();
+        data.add("018");
+        data.add("zzz");
+        mysql.insertRow("dt", data);
         try{
             while (tablas.next()) {
                 System.out.println(""+tablas.getString(1));

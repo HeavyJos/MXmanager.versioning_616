@@ -3,12 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ligamxadmin;
+package ligamx;
 
 import java.awt.Color;
-import java.awt.Graphics;
-import javax.swing.JComponent;
-import javax.swing.plaf.basic.BasicMenuBarUI;
 
 /**
  *
@@ -38,11 +35,20 @@ public class GUI extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanelBar = new javax.swing.JPanel();
-        jLabelIconBar = new javax.swing.JLabel();
-        jLabelInfoBar = new javax.swing.JLabel();
         jPanelList = new javax.swing.JPanel();
+        jPanelMainList = new javax.swing.JPanel();
+        jLabelMainListExp = new javax.swing.JLabel();
+        jLabelMainListIns = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jComboBox2 = new javax.swing.JComboBox<>();
+        jLabel1 = new javax.swing.JLabel();
+        jLabelMainListIns1 = new javax.swing.JLabel();
+        jLabelMainListIns2 = new javax.swing.JLabel();
+        jLabelMainListIns3 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
         jPanelMain = new javax.swing.JPanel();
+        jPanelBar = new javax.swing.JPanel();
+        jLabelInfoBar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(235, 235, 235));
@@ -55,60 +61,118 @@ public class GUI extends javax.swing.JFrame {
         });
         getContentPane().setLayout(null);
 
-        jPanelBar.setBackground(new java.awt.Color(25, 20, 74));
-        jPanelBar.setPreferredSize(new java.awt.Dimension(800, 48));
-        jPanelBar.setLayout(null);
-
-        jLabelIconBar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabelIconBar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelIconBar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/home2.png"))); // NOI18N
-        jLabelIconBar.setPreferredSize(new java.awt.Dimension(48, 48));
-        jPanelBar.add(jLabelIconBar);
-        jLabelIconBar.setBounds(8, 0, 48, 48);
-
-        jLabelInfoBar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        jLabelInfoBar.setForeground(new java.awt.Color(255, 255, 255));
-        jLabelInfoBar.setText("Menu Principal");
-        jLabelInfoBar.setPreferredSize(new java.awt.Dimension(144, 48));
-        jPanelBar.add(jLabelInfoBar);
-        jLabelInfoBar.setBounds(56, 0, 144, 48);
-
-        getContentPane().add(jPanelBar);
-        jPanelBar.setBounds(0, 0, 800, 48);
-
-        jPanelList.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelList.setBackground(new java.awt.Color(235, 235, 235));
         jPanelList.setPreferredSize(new java.awt.Dimension(192, 536));
+        jPanelList.setLayout(new java.awt.CardLayout());
 
-        javax.swing.GroupLayout jPanelListLayout = new javax.swing.GroupLayout(jPanelList);
-        jPanelList.setLayout(jPanelListLayout);
-        jPanelListLayout.setHorizontalGroup(
-            jPanelListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 192, Short.MAX_VALUE)
-        );
-        jPanelListLayout.setVerticalGroup(
-            jPanelListLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 536, Short.MAX_VALUE)
-        );
+        jPanelMainList.setBackground(new java.awt.Color(235, 235, 235));
+        jPanelMainList.setLayout(null);
+
+        jLabelMainListExp.setBackground(new java.awt.Color(25, 20, 74));
+        jLabelMainListExp.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabelMainListExp.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelMainListExp.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelMainListExp.setText("Acciones");
+        jLabelMainListExp.setOpaque(true);
+        jLabelMainListExp.setPreferredSize(new java.awt.Dimension(192, 33));
+        jPanelMainList.add(jLabelMainListExp);
+        jLabelMainListExp.setBounds(0, 132, 192, 33);
+
+        jLabelMainListIns.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelMainListIns.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabelMainListIns.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelMainListIns.setText("Insertar");
+        jLabelMainListIns.setOpaque(true);
+        jLabelMainListIns.setPreferredSize(new java.awt.Dimension(192, 33));
+        jPanelMainList.add(jLabelMainListIns);
+        jLabelMainListIns.setBounds(0, 198, 192, 33);
+
+        jComboBox1.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox1.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione una tabla-" }));
+        jComboBox1.setEnabled(false);
+        jComboBox1.setPreferredSize(new java.awt.Dimension(192, 33));
+        jPanelMainList.add(jComboBox1);
+        jComboBox1.setBounds(0, 33, 192, 33);
+
+        jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
+        jComboBox2.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un registro-" }));
+        jComboBox2.setEnabled(false);
+        jComboBox2.setPreferredSize(new java.awt.Dimension(192, 33));
+        jPanelMainList.add(jComboBox2);
+        jComboBox2.setBounds(0, 66, 192, 33);
+
+        jLabel1.setBackground(new java.awt.Color(25, 20, 74));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Filtro de busqueda");
+        jLabel1.setOpaque(true);
+        jLabel1.setPreferredSize(new java.awt.Dimension(192, 33));
+        jLabel1.setRequestFocusEnabled(false);
+        jPanelMainList.add(jLabel1);
+        jLabel1.setBounds(0, 0, 192, 33);
+
+        jLabelMainListIns1.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelMainListIns1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabelMainListIns1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelMainListIns1.setText("Explorar");
+        jLabelMainListIns1.setOpaque(true);
+        jLabelMainListIns1.setPreferredSize(new java.awt.Dimension(192, 33));
+        jPanelMainList.add(jLabelMainListIns1);
+        jLabelMainListIns1.setBounds(0, 165, 192, 33);
+
+        jLabelMainListIns2.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelMainListIns2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabelMainListIns2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelMainListIns2.setText("Modificar");
+        jLabelMainListIns2.setOpaque(true);
+        jLabelMainListIns2.setPreferredSize(new java.awt.Dimension(192, 33));
+        jPanelMainList.add(jLabelMainListIns2);
+        jLabelMainListIns2.setBounds(0, 231, 192, 33);
+
+        jLabelMainListIns3.setBackground(new java.awt.Color(255, 255, 255));
+        jLabelMainListIns3.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabelMainListIns3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelMainListIns3.setText("Eliminar");
+        jLabelMainListIns3.setOpaque(true);
+        jLabelMainListIns3.setPreferredSize(new java.awt.Dimension(192, 33));
+        jPanelMainList.add(jLabelMainListIns3);
+        jLabelMainListIns3.setBounds(0, 264, 192, 33);
+
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/LigaMx.png"))); // NOI18N
+        jLabel2.setPreferredSize(new java.awt.Dimension(192, 70));
+        jPanelMainList.add(jLabel2);
+        jLabel2.setBounds(0, 310, 192, 70);
+
+        jPanelList.add(jPanelMainList, "card2");
 
         getContentPane().add(jPanelList);
         jPanelList.setBounds(8, 56, 192, 536);
 
         jPanelMain.setBackground(new java.awt.Color(255, 255, 255));
         jPanelMain.setPreferredSize(new java.awt.Dimension(584, 536));
-
-        javax.swing.GroupLayout jPanelMainLayout = new javax.swing.GroupLayout(jPanelMain);
-        jPanelMain.setLayout(jPanelMainLayout);
-        jPanelMainLayout.setHorizontalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 584, Short.MAX_VALUE)
-        );
-        jPanelMainLayout.setVerticalGroup(
-            jPanelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 536, Short.MAX_VALUE)
-        );
-
+        jPanelMain.setLayout(new java.awt.CardLayout());
         getContentPane().add(jPanelMain);
         jPanelMain.setBounds(208, 56, 584, 536);
+
+        jPanelBar.setBackground(new java.awt.Color(235, 235, 235));
+        jPanelBar.setPreferredSize(new java.awt.Dimension(800, 600));
+        jPanelBar.setLayout(null);
+
+        jLabelInfoBar.setBackground(new java.awt.Color(25, 20, 74));
+        jLabelInfoBar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabelInfoBar.setForeground(new java.awt.Color(255, 255, 255));
+        jLabelInfoBar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabelInfoBar.setText("Liga Mx");
+        jLabelInfoBar.setOpaque(true);
+        jLabelInfoBar.setPreferredSize(new java.awt.Dimension(800, 48));
+        jPanelBar.add(jLabelInfoBar);
+        jLabelInfoBar.setBounds(0, 0, 800, 48);
+
+        getContentPane().add(jPanelBar);
+        jPanelBar.setBounds(0, 0, 800, 600);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -128,7 +192,7 @@ public class GUI extends javax.swing.JFrame {
          */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
+                if ("Metal".equals(info.getName())) {
                     javax.swing.UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
@@ -153,10 +217,19 @@ public class GUI extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabelIconBar;
+    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelInfoBar;
+    private javax.swing.JLabel jLabelMainListExp;
+    private javax.swing.JLabel jLabelMainListIns;
+    private javax.swing.JLabel jLabelMainListIns1;
+    private javax.swing.JLabel jLabelMainListIns2;
+    private javax.swing.JLabel jLabelMainListIns3;
     private javax.swing.JPanel jPanelBar;
     private javax.swing.JPanel jPanelList;
     private javax.swing.JPanel jPanelMain;
+    private javax.swing.JPanel jPanelMainList;
     // End of variables declaration//GEN-END:variables
 }

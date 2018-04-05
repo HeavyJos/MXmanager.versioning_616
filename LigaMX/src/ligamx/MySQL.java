@@ -94,11 +94,19 @@ public class MySQL {
             campos+=")";
             comm="INSERT INTO "+table+" "+campos+" VALUES (";
             for(int i=0;i<data.size();i++){
-                comm+=data.get(i)+",";
+                try{
+                    Double.parseDouble(data.get(i).toString());
+                    comm+=data.get(i).toString()+",";
+                }
+                catch(Exception e){
+                    comm+="'"+data.get(i).toString()+"',";
+                }
+                
             }
             comm=comm.substring(0,comm.length()-1);
             comm+=");";
             System.out.println(comm);
+            action(comm);
         }
         catch(SQLException e){
             
@@ -119,11 +127,17 @@ public class MySQL {
         ResultSet tablas=mysql.getTables();
         ResultSet desc=mysql.getDesc("partido");
         ResultSet rows=mysql.getRows("tipopartido");
-        //mysql.deleteRow("temporada", 2);
+        mysql.deleteRow("partido", 17);
         ArrayList data=new ArrayList();
-        data.add("018");
-        data.add("zzz");
-        mysql.insertRow("dt", data);
+        data.add("017");
+        data.add("1");
+        data.add("10");
+        data.add("1");
+        data.add("2");
+        data.add("16");
+        data.add("2017-08-17");
+        data.add("1");
+        //mysql.insertRow("partido", data);
         try{
             while (tablas.next()) {
                 System.out.println(""+tablas.getString(1));

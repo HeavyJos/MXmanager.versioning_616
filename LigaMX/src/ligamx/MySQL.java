@@ -59,7 +59,9 @@ public class MySQL {
         ps=connection.prepareStatement(comm);
         ps.execute();
         }
-        catch(SQLException e){}
+        catch(SQLException e){
+            e.getSQLState();
+        }
     }
     
     
@@ -105,13 +107,41 @@ public class MySQL {
             }
             comm=comm.substring(0,comm.length()-1);
             comm+=");";
-            System.out.println(comm);
+            //System.out.println(comm);
             action(comm);
         }
         catch(SQLException e){
             
         }
         
+    }
+    
+    public void updateRow(String table,ArrayList data,int id){
+        //UPDATE `partido` SET `golesLocal` = '5', `golesVisitante` = '3', `idJornada` = '17', `TipoPartido_idTipoPartido` = '4' WHERE `partido`.`idPartido` = 10
+        String comm="UPDATE "+table+" SET ";
+        ResultSet fields=getDesc(table);
+        ArrayList campos=new ArrayList();
+        try{
+            while(fields.next()){
+                campos.add(fields.getString(1));
+            }
+        }
+        catch(SQLException e){
+            
+        }
+        for(int i=0;i<data.size();i++){
+            try{
+            Double.parseDouble(data.get(i).toString());
+            comm+=campos.get(i).toString()+"="+data.get(i).toString()+",";
+            }
+            catch(Exception ex){
+                comm+=campos.get(i).toString()+"='"+data.get(i).toString()+"',";
+            }
+        }
+        comm=comm.substring(0, comm.length()-1);
+        comm+=" WHERE "+campos.get(0).toString()+"="+id+";";
+        //System.out.println(comm);
+        action(comm);
     }
     
     public void CloseConnection(){
@@ -124,22 +154,23 @@ public class MySQL {
     public static void main(String args[]){
         MySQL mysql=new MySQL();
         mysql.Connect();
-        ResultSet tablas=mysql.getTables();
-        ResultSet desc=mysql.getDesc("partido");
-        ResultSet rows=mysql.getRows("tipopartido");
-        mysql.deleteRow("partido", 17);
+        //ResultSet tablas=mysql.getTables();
+        //ResultSet desc=mysql.getDesc("partido");
+        //ResultSet rows=mysql.getRows("tipopartido");
+        //mysql.deleteRow("partido", 17);
         ArrayList data=new ArrayList();
         data.add("017");
         data.add("1");
         data.add("10");
-        data.add("1");
+        data.add("3");
         data.add("2");
         data.add("16");
-        data.add("2017-08-17");
-        data.add("1");
+        data.add("2017-08-20");
+        data.add("4");
         //mysql.insertRow("partido", data);
+        mysql.updateRow("partido", data, 17);
         try{
-            while (tablas.next()) {
+            /*while (tablas.next()) {
                 System.out.println(""+tablas.getString(1));
             }
             while (rows.next()) {
@@ -147,7 +178,7 @@ public class MySQL {
             }
             while (desc.next()) {
                 System.out.println(""+desc.getString(1));
-            }
+            }*/
             mysql.CloseConnection();
         }catch(Exception e){}
     }

@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 04-04-2018 a las 07:11:06
+-- Tiempo de generación: 07-04-2018 a las 15:26:22
 -- Versión del servidor: 5.7.21-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.28-0ubuntu0.16.04.1
 
@@ -207,13 +207,14 @@ INSERT INTO `partido` (`idPartido`, `idEquipoLocal`, `idEquipoVisitante`, `goles
 (7, 13, 14, 1, 3, 15, '2017-08-07 00:00:00', 1),
 (8, 15, 16, 2, 1, 15, '2017-08-08 00:00:00', 1),
 (9, 1, 3, 2, 2, 16, '2017-08-09 00:00:00', 1),
-(10, 2, 4, 2, 0, 16, '2017-08-10 00:00:00', 1),
+(10, 2, 4, 5, 3, 17, '2017-08-10 00:00:00', 4),
 (11, 5, 7, 1, 0, 16, '2017-08-11 00:00:00', 1),
 (12, 6, 8, 3, 2, 16, '2017-08-12 00:00:00', 1),
 (13, 9, 11, 3, 3, 16, '2017-08-13 00:00:00', 1),
 (14, 10, 12, 1, 0, 16, '2017-08-14 00:00:00', 1),
 (15, 13, 15, 2, 2, 16, '2017-08-15 00:00:00', 1),
-(16, 14, 16, 1, 1, 16, '2017-08-16 00:00:00', 1);
+(16, 14, 16, 1, 1, 16, '2017-08-16 00:00:00', 1),
+(17, 1, 10, 3, 2, 16, '2017-08-20 00:00:00', 4);
 
 -- --------------------------------------------------------
 
@@ -255,6 +256,26 @@ INSERT INTO `tipopartido` (`idTipoPartido`, `nombreTipoPartido`) VALUES
 (4, 'Semifinal'),
 (5, 'Final'),
 (6, 'Amistoso');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `usuarios`
+--
+
+CREATE TABLE `usuarios` (
+  `idUsuario` int(11) NOT NULL,
+  `Nom_usuario` varchar(16) NOT NULL,
+  `contraseña` varchar(16) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`idUsuario`, `Nom_usuario`, `contraseña`) VALUES
+(1, 'Elias_ZZZ', '1234'),
+(2, 'Martin', '1234');
 
 --
 -- Índices para tablas volcadas
@@ -310,6 +331,12 @@ ALTER TABLE `tipopartido`
   ADD PRIMARY KEY (`idTipoPartido`);
 
 --
+-- Indices de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD PRIMARY KEY (`idUsuario`);
+
+--
 -- AUTO_INCREMENT de las tablas volcadas
 --
 
@@ -322,7 +349,12 @@ ALTER TABLE `equipo`
 -- AUTO_INCREMENT de la tabla `partido`
 --
 ALTER TABLE `partido`
-  MODIFY `idPartido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+  MODIFY `idPartido` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+--
+-- AUTO_INCREMENT de la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  MODIFY `idUsuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 --
 -- Restricciones para tablas volcadas
 --

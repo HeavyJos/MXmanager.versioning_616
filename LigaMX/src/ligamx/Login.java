@@ -161,6 +161,7 @@ public class Login extends javax.swing.JFrame {
                 }
             }
             error.setVisible(true);
+            txtPassword.setText("");
             repaint();
         }
         catch(SQLException e){}

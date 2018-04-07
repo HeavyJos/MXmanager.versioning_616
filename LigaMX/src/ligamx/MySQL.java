@@ -144,6 +144,11 @@ public class MySQL {
         action(comm);
     }
     
+    public ResultSet getUsers(){
+        getRows("usuarios");
+        return row;
+    }
+    
     public void CloseConnection(){
         try{
         connection.close();
@@ -151,7 +156,7 @@ public class MySQL {
         catch(SQLException e){}
     }
     
-    public static void main(String args[]){
+    /*public static void main(String args[]){
         MySQL mysql=new MySQL();
         mysql.Connect();
         //ResultSet tablas=mysql.getTables();
@@ -168,7 +173,7 @@ public class MySQL {
         data.add("2017-08-20");
         data.add("4");
         //mysql.insertRow("partido", data);
-        mysql.updateRow("partido", data, 17);
+        //mysql.updateRow("partido", data, 17);
         try{
             /*while (tablas.next()) {
                 System.out.println(""+tablas.getString(1));
@@ -178,8 +183,8 @@ public class MySQL {
             }
             while (desc.next()) {
                 System.out.println(""+desc.getString(1));
-            }*/
+            }
             mysql.CloseConnection();
         }catch(Exception e){}
-    }
+    }*/
 }

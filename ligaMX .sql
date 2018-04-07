@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Servidor: localhost
--- Tiempo de generación: 07-04-2018 a las 15:26:22
+-- Tiempo de generación: 07-04-2018 a las 16:36:17
 -- Versión del servidor: 5.7.21-0ubuntu0.16.04.1
 -- Versión de PHP: 7.0.28-0ubuntu0.16.04.1
 
@@ -24,30 +24,61 @@ DELIMITER $$
 --
 -- Procedimientos
 --
-CREATE DEFINER=`root`@`localhost` PROCEDURE `poscicion` ()  BEGIN
+CREATE DEFINER=`root`@`localhost` PROCEDURE `posicion` ()  BEGIN
+		
 	DECLARE i int DEFAULT 1;
     DECLARE Gvisitantes int;
     DECLARE Glocales int;
     DECLARE locales int;
     DECLARE visitantes int;
-    DECLARE puntos int DEFAULT 0;
+    DECLARE puntosL int DEFAULT 0;
+    DECLARE puntosV int DEFAULT 0;
+    DECLARE z int DEFAULT 1;
+    DECLARE jor int DEFAULT 15;
+    DECLARE tlpuntos int;
+    Declare tvpuntos int;
     
-    SET visitantes=(SELECT idEquipoVisitante from partido WHERE idPartido=i);
-    SET locales=(SELECT idEquipoLocal from partido WHERE idPartido=i);
-    SET Gvisitantes=(SELECT golesVisitante from partido WHERE idPartido=i);
-    SET Glocales=(SELECT golesLocal from partido WHERE idPartido=i);
+    CREATE TEMPORARY TABLE posiciones (idEquipo int,equipo varchar(50), puntosE int DEFAULT 0);
+    WHILE z<17 DO
+    	INSERT into posiciones(idEquipo,equipo) values ((select idEquipo from equipo where idEquipo=z),(select nombreEquipo from equipo where idEquipo=z));
+        SET z=z+1;
+    END WHILE;
     
-    IF Glocales>Gvisitantes THEN
-    	SET puntos=puntos+3;
-    ELSE
-    	IF Gvisitantes>Glocales THEN
-        	set puntos=puntos+0;
+	WHILE i<17 and jor<=16 DO
+        SET visitantes=(SELECT idEquipoVisitante from partido WHERE idPartido=i and idjornada=jor);
+        SET locales=(SELECT idEquipoLocal from partido WHERE idPartido=i and idjornada=jor);
+        SET Gvisitantes=(SELECT golesVisitante from partido WHERE idPartido=i and idjornada=jor);
+        SET Glocales=(SELECT golesLocal from partido WHERE idPartido=i and idjornada=jor);
+
+        
+
+        IF Glocales>Gvisitantes THEN
+            SET puntosL=puntosL+3;
+            SET puntosV=puntosV+0;
         ELSE
-        	SET puntos=puntos+1;
+            IF Gvisitantes>Glocales THEN
+                set puntosL=puntosL+0;
+                SET puntosV=puntosV+3;
+            ELSE
+                SET puntosL=puntosL+1;
+                SET puntosV=puntosV+1;
+            END IF;
         END IF;
-    END IF;
+        SET tlpuntos=(SELECT puntosE from posiciones WHERE idEquipo=locales);
+        SET tvpuntos=(SELECT puntosE from posiciones WHERE idEquipo=visitantes);
+        UPDATE posiciones SET puntosE=(tlpuntos+puntosL) WHERE idEquipo=locales;
+        UPDATE posiciones SET puntosE=(tvpuntos+puntosV) WHERE idEquipo=visitantes;
+        SET i=i+1;
+        SET puntosL=0;
+        SET puntosV=0;
+        IF i=9 AND jor=15 THEN
+            SET jor=jor+1;
+        END IF;
+    END WHILE;
+    SELECT * from posiciones order by puntosE DESC;
+    DROP table IF EXISTS posiciones;
     
-    SELECT nombreEquipo, (puntos) as puntos from Equipo where idEquipo=i;
+    
 END$$
 
 DELIMITER ;

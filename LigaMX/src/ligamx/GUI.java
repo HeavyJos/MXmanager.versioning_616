@@ -93,7 +93,7 @@ public class GUI extends javax.swing.JFrame {
         jComboBox1.setEnabled(false);
         jComboBox1.setPreferredSize(new java.awt.Dimension(192, 33));
         jPanelMainList.add(jComboBox1);
-        jComboBox1.setBounds(0, 33, 192, 33);
+        jComboBox1.setBounds(0, 363, 192, 33);
 
         jComboBox2.setBackground(new java.awt.Color(255, 255, 255));
         jComboBox2.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
@@ -101,7 +101,7 @@ public class GUI extends javax.swing.JFrame {
         jComboBox2.setEnabled(false);
         jComboBox2.setPreferredSize(new java.awt.Dimension(192, 33));
         jPanelMainList.add(jComboBox2);
-        jComboBox2.setBounds(0, 66, 192, 33);
+        jComboBox2.setBounds(0, 396, 192, 33);
 
         jLabel1.setBackground(new java.awt.Color(25, 20, 74));
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -111,7 +111,7 @@ public class GUI extends javax.swing.JFrame {
         jLabel1.setPreferredSize(new java.awt.Dimension(192, 33));
         jLabel1.setRequestFocusEnabled(false);
         jPanelMainList.add(jLabel1);
-        jLabel1.setBounds(0, 0, 192, 33);
+        jLabel1.setBounds(0, 330, 192, 33);
 
         jLabelMainListIns1.setBackground(new java.awt.Color(255, 255, 255));
         jLabelMainListIns1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -142,9 +142,9 @@ public class GUI extends javax.swing.JFrame {
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/LigaMx.png"))); // NOI18N
-        jLabel2.setPreferredSize(new java.awt.Dimension(192, 70));
+        jLabel2.setPreferredSize(new java.awt.Dimension(192, 99));
         jPanelMainList.add(jLabel2);
-        jLabel2.setBounds(0, 310, 192, 70);
+        jLabel2.setBounds(0, 0, 192, 99);
 
         jPanelList.add(jPanelMainList, "card2");
 

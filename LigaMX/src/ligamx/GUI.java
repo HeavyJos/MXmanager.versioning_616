@@ -665,6 +665,7 @@ public class GUI extends javax.swing.JFrame {
                 MySQL mysql=new MySQL();
                 mysql.Connect();
                 ResultSet record = mysql.getRows("equipo");
+                dataRaw.add("null");
                 while(record.next()){
                     if(PInLocal1.getSelectedItem().toString()
                         .equals(record.getString(2))){
@@ -684,18 +685,18 @@ public class GUI extends javax.swing.JFrame {
                 record = mysql.getRows("jornada");
                 while(record.next()){
                     if(PinJornada1.getSelectedItem().toString()
-                        .equals(record.getString(2))){
+                        .equals(record.getString(1))){
                         dataRaw.add(record.getInt(1));
                     }
                 }
-                dataRaw.add(PInDate1.getText());
+                dataRaw.add(PInDate1.getText());/*
                 record = mysql.getRows("jornada");
                 while(record.next()){
                     if(PinJornada1.getSelectedItem().toString()
-                        .equals(record.getString(2))){
+                        .equals(record.getString(1))){
                         dataRaw.add(record.getInt(1));
                     }
-                }
+                }*/
                 record = mysql.getRows("tipopartido");
                 while(record.next()){
                     if(PInPartido1.getSelectedItem().toString()
@@ -781,6 +782,9 @@ public class GUI extends javax.swing.JFrame {
         this.userProfile.setText(userName);
         setUserPhoto(userName, 27, 27);
         visibleData(false);
+        bmainData.setEnabled(false);
+        bModData.setEnabled(true);
+        bNewData.setEnabled(true);
         try {
             filterTablesStatus(true);
         } catch (SQLException ex) {
@@ -799,18 +803,21 @@ public class GUI extends javax.swing.JFrame {
 
         jPanelList = new javax.swing.JPanel();
         jPanelMainList = new javax.swing.JPanel();
-        userProfile = new javax.swing.JLabel();
-        userProfileBack = new javax.swing.JLabel();
-        ModData = new javax.swing.JLabel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jPanelFiltros = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
         filterTables = new javax.swing.JComboBox<>();
         filterRecords = new javax.swing.JComboBox<>();
-        jLabel1 = new javax.swing.JLabel();
-        mainData = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jPanelMenu = new javax.swing.JPanel();
         jLabelMainListExp1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        newData = new javax.swing.JLabel();
-        extraData = new javax.swing.JLabel();
+        bmainData = new javax.swing.JButton();
+        bModData = new javax.swing.JButton();
+        bNewData = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jPanelExtra = new javax.swing.JPanel();
         jLabelMainListExp2 = new javax.swing.JLabel();
+        bExtraData = new javax.swing.JButton();
         jPanelMain = new javax.swing.JPanel();
         jScrollPaneExploreData = new javax.swing.JScrollPane();
         jPanelexploreData = new javax.swing.JPanel();
@@ -879,11 +886,13 @@ public class GUI extends javax.swing.JFrame {
         PInLocal1 = new javax.swing.JComboBox<>();
         PinJornada1 = new javax.swing.JComboBox<>();
         jPanelBar = new javax.swing.JPanel();
+        userProfile = new javax.swing.JLabel();
         jLabelInfoBar = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Liga Mx");
         setBackground(new java.awt.Color(235, 235, 235));
-        setPreferredSize(new java.awt.Dimension(800, 600));
+        setPreferredSize(new java.awt.Dimension(638, 377));
         setResizable(false);
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
@@ -893,47 +902,34 @@ public class GUI extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         jPanelList.setBackground(new java.awt.Color(235, 235, 235));
-        jPanelList.setPreferredSize(new java.awt.Dimension(192, 536));
+        jPanelList.setPreferredSize(new java.awt.Dimension(192, 313));
         jPanelList.setLayout(new java.awt.CardLayout());
 
         jPanelMainList.setBackground(new java.awt.Color(235, 235, 235));
         jPanelMainList.setLayout(null);
 
-        userProfile.setBackground(new java.awt.Color(255, 255, 255));
-        userProfile.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        userProfile.setForeground(new java.awt.Color(0, 0, 0));
-        userProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/home2.png"))); // NOI18N
-        userProfile.setText("Usuario");
-        userProfile.setPreferredSize(new java.awt.Dimension(186, 33));
-        jPanelMainList.add(userProfile);
-        userProfile.setBounds(4, 33, 186, 33);
+        jScrollPane1.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane1.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane1.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane1.setPreferredSize(new java.awt.Dimension(192, 95));
 
-        userProfileBack.setBackground(new java.awt.Color(255, 255, 255));
-        userProfileBack.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        userProfileBack.setForeground(new java.awt.Color(0, 0, 0));
-        userProfileBack.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/home2.png"))); // NOI18N
-        userProfileBack.setOpaque(true);
-        userProfileBack.setPreferredSize(new java.awt.Dimension(192, 33));
-        jPanelMainList.add(userProfileBack);
-        userProfileBack.setBounds(0, 33, 192, 33);
+        jPanelFiltros.setBackground(new java.awt.Color(255, 255, 255));
+        jPanelFiltros.setPreferredSize(new java.awt.Dimension(192, 99));
+        jPanelFiltros.setLayout(null);
 
-        ModData.setBackground(new java.awt.Color(255, 255, 255));
-        ModData.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        ModData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        ModData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/editB.png"))); // NOI18N
-        ModData.setText("Modificar");
-        ModData.setOpaque(true);
-        ModData.setPreferredSize(new java.awt.Dimension(192, 33));
-        ModData.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                ModDataMouseClicked(evt);
-            }
-        });
-        jPanelMainList.add(ModData);
-        ModData.setBounds(0, 297, 192, 33);
+        jLabel1.setBackground(new java.awt.Color(25, 20, 74));
+        jLabel1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Filtro de busqueda");
+        jLabel1.setOpaque(true);
+        jLabel1.setPreferredSize(new java.awt.Dimension(192, 33));
+        jLabel1.setRequestFocusEnabled(false);
+        jPanelFiltros.add(jLabel1);
+        jLabel1.setBounds(-3, -2, 192, 33);
 
         filterTables.setBackground(new java.awt.Color(255, 255, 255));
-        filterTables.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        filterTables.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         filterTables.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione una tabla-" }));
         filterTables.setEnabled(false);
         filterTables.setPreferredSize(new java.awt.Dimension(192, 33));
@@ -947,11 +943,11 @@ public class GUI extends javax.swing.JFrame {
                 filterTablesActionPerformed(evt);
             }
         });
-        jPanelMainList.add(filterTables);
-        filterTables.setBounds(0, 132, 192, 33);
+        jPanelFiltros.add(filterTables);
+        filterTables.setBounds(-3, 29, 192, 33);
 
         filterRecords.setBackground(new java.awt.Color(255, 255, 255));
-        filterRecords.setFont(new java.awt.Font("SansSerif", 1, 11)); // NOI18N
+        filterRecords.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
         filterRecords.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "-Seleccione un registro-" }));
         filterRecords.setEnabled(false);
         filterRecords.setPreferredSize(new java.awt.Dimension(192, 33));
@@ -960,33 +956,20 @@ public class GUI extends javax.swing.JFrame {
                 filterRecordsActionPerformed(evt);
             }
         });
-        jPanelMainList.add(filterRecords);
-        filterRecords.setBounds(0, 165, 192, 33);
+        jPanelFiltros.add(filterRecords);
+        filterRecords.setBounds(-3, 58, 192, 33);
 
-        jLabel1.setBackground(new java.awt.Color(25, 20, 74));
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Filtro de busqueda");
-        jLabel1.setOpaque(true);
-        jLabel1.setPreferredSize(new java.awt.Dimension(192, 33));
-        jLabel1.setRequestFocusEnabled(false);
-        jPanelMainList.add(jLabel1);
-        jLabel1.setBounds(0, 99, 192, 33);
+        jScrollPane1.setViewportView(jPanelFiltros);
 
-        mainData.setBackground(new java.awt.Color(255, 255, 255));
-        mainData.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        mainData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        mainData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/searchB.png"))); // NOI18N
-        mainData.setText("Explorar");
-        mainData.setOpaque(true);
-        mainData.setPreferredSize(new java.awt.Dimension(192, 33));
-        mainData.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                mainDataMouseClicked(evt);
-            }
-        });
-        jPanelMainList.add(mainData);
-        mainData.setBounds(0, 264, 192, 33);
+        jPanelMainList.add(jScrollPane1);
+        jScrollPane1.setBounds(0, 0, 192, 95);
+
+        jScrollPane2.setBackground(new java.awt.Color(255, 255, 255));
+        jScrollPane2.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane2.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane2.setPreferredSize(new java.awt.Dimension(192, 125));
+
+        jPanelMenu.setLayout(null);
 
         jLabelMainListExp1.setBackground(new java.awt.Color(25, 20, 74));
         jLabelMainListExp1.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -995,48 +978,58 @@ public class GUI extends javax.swing.JFrame {
         jLabelMainListExp1.setText("Menu");
         jLabelMainListExp1.setOpaque(true);
         jLabelMainListExp1.setPreferredSize(new java.awt.Dimension(192, 33));
-        jPanelMainList.add(jLabelMainListExp1);
-        jLabelMainListExp1.setBounds(0, 231, 192, 33);
+        jPanelMenu.add(jLabelMainListExp1);
+        jLabelMainListExp1.setBounds(-3, 0, 192, 33);
 
-        jLabel2.setBackground(new java.awt.Color(25, 20, 74));
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setText("Usuario");
-        jLabel2.setOpaque(true);
-        jLabel2.setPreferredSize(new java.awt.Dimension(192, 33));
-        jLabel2.setRequestFocusEnabled(false);
-        jPanelMainList.add(jLabel2);
-        jLabel2.setBounds(0, 0, 192, 33);
-
-        newData.setBackground(new java.awt.Color(255, 255, 255));
-        newData.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        newData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        newData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/addB.png"))); // NOI18N
-        newData.setText("Añadir");
-        newData.setOpaque(true);
-        newData.setPreferredSize(new java.awt.Dimension(192, 33));
-        newData.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                newDataMouseClicked(evt);
+        bmainData.setBackground(new java.awt.Color(255, 255, 255));
+        bmainData.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        bmainData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/searchB.png"))); // NOI18N
+        bmainData.setText("Modo de exploración");
+        bmainData.setPreferredSize(new java.awt.Dimension(200, 33));
+        bmainData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bmainDataActionPerformed(evt);
             }
         });
-        jPanelMainList.add(newData);
-        newData.setBounds(0, 330, 192, 33);
+        jPanelMenu.add(bmainData);
+        bmainData.setBounds(-7, 30, 200, 33);
 
-        extraData.setBackground(new java.awt.Color(255, 255, 255));
-        extraData.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
-        extraData.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        extraData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/deleteB.png"))); // NOI18N
-        extraData.setText("Eliminar");
-        extraData.setOpaque(true);
-        extraData.setPreferredSize(new java.awt.Dimension(192, 33));
-        extraData.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                extraDataMouseClicked(evt);
+        bModData.setBackground(new java.awt.Color(255, 255, 255));
+        bModData.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        bModData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/editB.png"))); // NOI18N
+        bModData.setText("Modo de edición");
+        bModData.setPreferredSize(new java.awt.Dimension(200, 33));
+        bModData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bModDataActionPerformed(evt);
             }
         });
-        jPanelMainList.add(extraData);
-        extraData.setBounds(0, 430, 192, 33);
+        jPanelMenu.add(bModData);
+        bModData.setBounds(-7, 59, 200, 33);
+
+        bNewData.setBackground(new java.awt.Color(255, 255, 255));
+        bNewData.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        bNewData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/addB.png"))); // NOI18N
+        bNewData.setText("Modo de inserción");
+        bNewData.setPreferredSize(new java.awt.Dimension(200, 33));
+        bNewData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bNewDataActionPerformed(evt);
+            }
+        });
+        jPanelMenu.add(bNewData);
+        bNewData.setBounds(-7, 88, 200, 33);
+
+        jScrollPane2.setViewportView(jPanelMenu);
+
+        jPanelMainList.add(jScrollPane2);
+        jScrollPane2.setBounds(0, 103, 192, 125);
+
+        jScrollPane3.setHorizontalScrollBarPolicy(javax.swing.ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        jScrollPane3.setVerticalScrollBarPolicy(javax.swing.ScrollPaneConstants.VERTICAL_SCROLLBAR_NEVER);
+        jScrollPane3.setPreferredSize(new java.awt.Dimension(192, 66));
+
+        jPanelExtra.setLayout(null);
 
         jLabelMainListExp2.setBackground(new java.awt.Color(25, 20, 74));
         jLabelMainListExp2.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
@@ -1045,16 +1038,34 @@ public class GUI extends javax.swing.JFrame {
         jLabelMainListExp2.setText("Acciones");
         jLabelMainListExp2.setOpaque(true);
         jLabelMainListExp2.setPreferredSize(new java.awt.Dimension(192, 33));
-        jPanelMainList.add(jLabelMainListExp2);
-        jLabelMainListExp2.setBounds(0, 400, 192, 33);
+        jPanelExtra.add(jLabelMainListExp2);
+        jLabelMainListExp2.setBounds(-3, 0, 192, 33);
+
+        bExtraData.setBackground(new java.awt.Color(255, 255, 255));
+        bExtraData.setFont(new java.awt.Font("SansSerif", 0, 12)); // NOI18N
+        bExtraData.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/deleteB.png"))); // NOI18N
+        bExtraData.setText("Eliminar registro");
+        bExtraData.setPreferredSize(new java.awt.Dimension(200, 33));
+        bExtraData.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                bExtraDataActionPerformed(evt);
+            }
+        });
+        jPanelExtra.add(bExtraData);
+        bExtraData.setBounds(-7, 30, 200, 33);
+
+        jScrollPane3.setViewportView(jPanelExtra);
+
+        jPanelMainList.add(jScrollPane3);
+        jScrollPane3.setBounds(0, 232, 192, 66);
 
         jPanelList.add(jPanelMainList, "card2");
 
         getContentPane().add(jPanelList);
-        jPanelList.setBounds(8, 56, 192, 536);
+        jPanelList.setBounds(8, 56, 192, 313);
 
         jPanelMain.setBackground(new java.awt.Color(255, 255, 255));
-        jPanelMain.setPreferredSize(new java.awt.Dimension(584, 536));
+        jPanelMain.setPreferredSize(new java.awt.Dimension(422, 313));
         jPanelMain.setLayout(new java.awt.CardLayout());
 
         jPanelexploreData.setBackground(new java.awt.Color(255, 255, 255));
@@ -1433,17 +1444,25 @@ public class GUI extends javax.swing.JFrame {
         jPanelMain.add(jScrollPaneInDataP, "adddataP");
 
         getContentPane().add(jPanelMain);
-        jPanelMain.setBounds(208, 56, 584, 536);
+        jPanelMain.setBounds(208, 56, 422, 313);
 
         jPanelBar.setBackground(new java.awt.Color(235, 235, 235));
         jPanelBar.setPreferredSize(new java.awt.Dimension(800, 600));
         jPanelBar.setLayout(null);
 
+        userProfile.setBackground(new java.awt.Color(255, 255, 255));
+        userProfile.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
+        userProfile.setForeground(new java.awt.Color(255, 255, 255));
+        userProfile.setIcon(new javax.swing.ImageIcon(getClass().getResource("/ligamx/Icons/home2.png"))); // NOI18N
+        userProfile.setText("Usuario");
+        userProfile.setPreferredSize(new java.awt.Dimension(186, 33));
+        jPanelBar.add(userProfile);
+        userProfile.setBounds(10, 10, 186, 33);
+
         jLabelInfoBar.setBackground(new java.awt.Color(25, 20, 74));
         jLabelInfoBar.setFont(new java.awt.Font("SansSerif", 1, 12)); // NOI18N
         jLabelInfoBar.setForeground(new java.awt.Color(255, 255, 255));
         jLabelInfoBar.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabelInfoBar.setText("Liga Mx");
         jLabelInfoBar.setOpaque(true);
         jLabelInfoBar.setPreferredSize(new java.awt.Dimension(800, 48));
         jPanelBar.add(jLabelInfoBar);
@@ -1460,30 +1479,6 @@ public class GUI extends javax.swing.JFrame {
 
     }//GEN-LAST:event_formMouseExited
     
-    //Cambio al panel de exploración de datos
-    private void mainDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_mainDataMouseClicked
-        isEditMode=false;
-        chargePanel("exploredata");
-        if(isInsertMode==true){
-        filterRecords.setEnabled(true);
-            if(filterTables.getSelectedItem().equals(filterTables.getItemAt(0))){
-                filterRecords.setSelectedIndex(0);
-                filterRecords.setEnabled(false);
-            }
-            else{
-                try {
-                    filterRecordsStatus(true);
-                } catch (SQLException ex) {
-                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
-            visibleData(false);
-            isInsertMode=false;
-            
-        }
-        dataExtra();
-    }//GEN-LAST:event_mainDataMouseClicked
-
     private void filterTablesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_filterTablesItemStateChanged
         
     }//GEN-LAST:event_filterTablesItemStateChanged
@@ -1543,9 +1538,41 @@ public class GUI extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_filterRecordsActionPerformed
 
-    private void ModDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ModDataMouseClicked
-        isEditMode=true;
-        chargePanel("moddata");
+    private void InDataExtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InDataExtraActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_InDataExtraActionPerformed
+
+    private void bExtraDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bExtraDataActionPerformed
+        if(isInsertMode==true){
+            inserData();
+            filterTables.setSelectedIndex(0);
+        }
+        else{
+            if(isEditMode==true){
+                updateData();
+            }
+            else{
+                deleteData();
+            }
+            if(filterTables.getSelectedItem().equals(filterTables.getItemAt(0))){
+                filterRecords.setSelectedIndex(0);
+                filterRecords.setEnabled(false);
+            }
+            else{
+                try {
+                    filterRecordsStatus(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
+        
+        visibleData(false);
+    }//GEN-LAST:event_bExtraDataActionPerformed
+
+    private void bmainDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bmainDataActionPerformed
+        isEditMode=false;
+        chargePanel("exploredata");
         if(isInsertMode==true){
         filterRecords.setEnabled(true);
             if(filterTables.getSelectedItem().equals(filterTables.getItemAt(0))){
@@ -1561,11 +1588,40 @@ public class GUI extends javax.swing.JFrame {
             }
             visibleData(false);
             isInsertMode=false;
+            
         }
         dataExtra();
-    }//GEN-LAST:event_ModDataMouseClicked
+        bmainData.setEnabled(false);
+        bModData.setEnabled(true);
+        bNewData.setEnabled(true);
+    }//GEN-LAST:event_bmainDataActionPerformed
 
-    private void newDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_newDataMouseClicked
+    private void bModDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bModDataActionPerformed
+        isEditMode=true;
+        chargePanel("moddata");
+        if(isInsertMode==true){
+            filterRecords.setEnabled(true);
+            if(filterTables.getSelectedItem().equals(filterTables.getItemAt(0))){
+                filterRecords.setSelectedIndex(0);
+                filterRecords.setEnabled(false);
+            }
+            else{
+                try {
+                    filterRecordsStatus(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(GUI.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            visibleData(false);
+            isInsertMode=false;
+        }
+        dataExtra();
+        bmainData.setEnabled(true);
+        bModData.setEnabled(false);
+        bNewData.setEnabled(true);
+    }//GEN-LAST:event_bModDataActionPerformed
+
+    private void bNewDataActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bNewDataActionPerformed
         chargePanel("adddata");
         filterRecords.setSelectedIndex(0);
         filterRecords.setEnabled(false);
@@ -1579,42 +1635,27 @@ public class GUI extends javax.swing.JFrame {
         isInsertMode=true;
         isEditMode=false;
         dataExtra();
-    }//GEN-LAST:event_newDataMouseClicked
-
-    private void InDataExtraActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_InDataExtraActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_InDataExtraActionPerformed
-
-    private void extraDataMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_extraDataMouseClicked
-        if(isEditMode==true){
-            updateData();
-        }
-        else{
-            if(isInsertMode==true){
-                inserData();
-            }
-            else{
-                deleteData();
-            }
-        }
-    }//GEN-LAST:event_extraDataMouseClicked
+        bmainData.setEnabled(true);
+        bModData.setEnabled(true);
+        bNewData.setEnabled(false);
+    }//GEN-LAST:event_bNewDataActionPerformed
     
     //Modificar el boton extra
     public void dataExtra(){
         if(isEditMode==true){
-            extraData.setText("Actualizar");
-            extraData.setIcon(new javax.swing.ImageIcon(getClass()
+            bExtraData.setText("Actualizar registro");
+            bExtraData.setIcon(new javax.swing.ImageIcon(getClass()
                     .getResource("/ligamx/Icons/saveB.png")));
         }
         else{
             if(isInsertMode==true){
-                extraData.setText("Guardar");
-            extraData.setIcon(new javax.swing.ImageIcon(getClass()
+                bExtraData.setText("Guardar registro");
+                bExtraData.setIcon(new javax.swing.ImageIcon(getClass()
                     .getResource("/ligamx/Icons/saveB.png")));
             }
             else{
-                extraData.setText("Eliminar");
-            extraData.setIcon(new javax.swing.ImageIcon(getClass()
+                bExtraData.setText("Eliminar registro");
+                bExtraData.setIcon(new javax.swing.ImageIcon(getClass()
                     .getResource("/ligamx/Icons/deleteB.png")));
             }
         }
@@ -1692,7 +1733,6 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel ExDataName;
     private javax.swing.JComboBox<String> InDataExtra;
     private javax.swing.JTextField InDataName;
-    private javax.swing.JLabel ModData;
     private javax.swing.JComboBox<String> ModDataExtra;
     private javax.swing.JTextField ModDataName;
     private javax.swing.JComboBox<String> ModPJornada;
@@ -1716,11 +1756,13 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel PVisit;
     private javax.swing.JLabel PVisitGol;
     private javax.swing.JComboBox<String> PinJornada1;
-    private javax.swing.JLabel extraData;
+    private javax.swing.JButton bExtraData;
+    private javax.swing.JButton bModData;
+    private javax.swing.JButton bNewData;
+    private javax.swing.JButton bmainData;
     private javax.swing.JComboBox<String> filterRecords;
     private javax.swing.JComboBox<String> filterTables;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabelExData;
     private javax.swing.JLabel jLabelExName;
     private javax.swing.JLabel jLabelInData;
@@ -1752,24 +1794,27 @@ public class GUI extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelPVisitGol1;
     private javax.swing.JLabel jLabelPVisitGol2;
     private javax.swing.JPanel jPanelBar;
+    private javax.swing.JPanel jPanelExtra;
+    private javax.swing.JPanel jPanelFiltros;
     private javax.swing.JPanel jPanelInData;
     private javax.swing.JPanel jPanelInP;
     private javax.swing.JPanel jPanelList;
     private javax.swing.JPanel jPanelMain;
     private javax.swing.JPanel jPanelMainList;
+    private javax.swing.JPanel jPanelMenu;
     private javax.swing.JPanel jPanelModData;
     private javax.swing.JPanel jPanelexploreData;
     private javax.swing.JPanel jPanelexploreDataP;
     private javax.swing.JPanel jPanelexploreModP;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPaneExploreData;
     private javax.swing.JScrollPane jScrollPaneExploreDataP;
     private javax.swing.JScrollPane jScrollPaneInData;
     private javax.swing.JScrollPane jScrollPaneInDataP;
     private javax.swing.JScrollPane jScrollPaneModData;
     private javax.swing.JScrollPane jScrollPaneModDataP;
-    private javax.swing.JLabel mainData;
-    private javax.swing.JLabel newData;
     private javax.swing.JLabel userProfile;
-    private javax.swing.JLabel userProfileBack;
     // End of variables declaration//GEN-END:variables
 }

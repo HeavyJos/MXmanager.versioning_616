@@ -96,7 +96,7 @@ public class MySQL {
         String comm;
         ResultSet fields=getDesc(table);
         try{
-            if(!table.equals("jornada"))
+            if(!(table.equals("jornada") || table.equals("partido")))
                 fields.next();
             while(fields.next()){
                 campos+=fields.getString(1)+",";
@@ -110,7 +110,7 @@ public class MySQL {
                     comm+=data.get(i).toString()+",";
                 }
                 catch(Exception e){
-                    if(data.get(i).equals("now()"))
+                    if(data.get(i).equals("null"))
                         comm+=""+data.get(i).toString()+",";
                     else
                         comm+="'"+data.get(i).toString()+"',";
@@ -119,7 +119,7 @@ public class MySQL {
             }
             comm=comm.substring(0,comm.length()-1);
             comm+=");";
-            //System.out.println(comm);
+            System.out.println(comm);
             action(comm);
         } catch (SQLException ex) {
             Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);

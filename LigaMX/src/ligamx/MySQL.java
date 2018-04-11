@@ -12,6 +12,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -70,6 +72,11 @@ public class MySQL {
         return row;
     }
     
+    public ResultSet getRowsEx(String table, String column, String value){
+        getData("SELECT * FROM "+table+" WHERE "+column+"="+value+";");
+        return row;
+    }
+    
     public ResultSet getTables(){
         getData("SHOW TABLES;");
         return row;
@@ -89,6 +96,8 @@ public class MySQL {
         String comm;
         ResultSet fields=getDesc(table);
         try{
+            if(!table.equals("jornada"))
+                fields.next();
             while(fields.next()){
                 campos+=fields.getString(1)+",";
             }
@@ -97,11 +106,14 @@ public class MySQL {
             comm="INSERT INTO "+table+" "+campos+" VALUES (";
             for(int i=0;i<data.size();i++){
                 try{
-                    Double.parseDouble(data.get(i).toString());
+                    Integer.parseInt(data.get(i).toString());
                     comm+=data.get(i).toString()+",";
                 }
                 catch(Exception e){
-                    comm+="'"+data.get(i).toString()+"',";
+                    if(data.get(i).equals("now()"))
+                        comm+=""+data.get(i).toString()+",";
+                    else
+                        comm+="'"+data.get(i).toString()+"',";
                 }
                 
             }
@@ -109,9 +121,8 @@ public class MySQL {
             comm+=");";
             //System.out.println(comm);
             action(comm);
-        }
-        catch(SQLException e){
-            
+        } catch (SQLException ex) {
+            Logger.getLogger(MySQL.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }
@@ -131,8 +142,8 @@ public class MySQL {
         }
         for(int i=0;i<data.size();i++){
             try{
-            Double.parseDouble(data.get(i).toString());
-            comm+=campos.get(i).toString()+"="+data.get(i).toString()+",";
+                Double.parseDouble(data.get(i).toString());
+                comm+=campos.get(i).toString()+"="+data.get(i).toString()+",";
             }
             catch(Exception ex){
                 comm+=campos.get(i).toString()+"='"+data.get(i).toString()+"',";
